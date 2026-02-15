@@ -1,0 +1,116 @@
+<div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+  <h3 class="text-xl font-bold text-gray-800 mb-4">
+    {{ dish ? 'Editar plato' : 'Nuevo plato' }}
+  </h3>
+
+  <form (ngSubmit)="onSubmit()" #dishFormRef="ngForm">
+    <!-- Nombre -->
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-medium mb-1">Nombre</label>
+      <input type="text"
+             id="name"
+             name="name"
+             [(ngModel)]="name"
+             required
+             maxlength="50"
+             #nameField="ngModel"
+             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+             placeholder="Nombre del plato" />
+      @if (nameField.invalid && nameField.touched) {
+        <p class="text-red-500 text-xs mt-1">El nombre es obligatorio (máx. 50 caracteres).</p>
+      }
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-4">
+      <label for="description" class="block text-gray-700 font-medium mb-1">Descripción</label>
+      <textarea id="description"
+                name="description"
+                [(ngModel)]="description"
+                required
+                maxlength="200"
+                #descField="ngModel"
+                rows="3"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                placeholder="Descripción del plato"></textarea>
+      @if (descField.invalid && descField.touched) {
+        <p class="text-red-500 text-xs mt-1">La descripción es obligatoria (máx. 200 caracteres).</p>
+      }
+    </div>
+
+    <!-- Precio y Categoría en la misma fila -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <!-- Precio -->
+      <div>
+        <label for="price" class="block text-gray-700 font-medium mb-1">Precio (€)</label>
+        <input type="number"
+               id="price"
+               name="price"
+               [(ngModel)]="price"
+               required
+               min="0.01"
+               step="0.01"
+               #priceField="ngModel"
+               class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+               placeholder="0.00" />
+        @if (priceField.invalid && priceField.touched) {
+          <p class="text-red-500 text-xs mt-1">El precio es obligatorio y debe ser positivo.</p>
+        }
+      </div>
+
+      <!-- Categoría -->
+      <div>
+        <label for="category" class="block text-gray-700 font-medium mb-1">Categoría</label>
+        <select id="category"
+                name="category"
+                [(ngModel)]="category"
+                required
+                #catField="ngModel"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+          <option value="" disabled>Selecciona categoría</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+        @if (catField.invalid && catField.touched) {
+          <p class="text-red-500 text-xs mt-1">La categoría es obligatoria.</p>
+        }
+      </div>
+    </div>
+
+    <!-- Imagen URL -->
+    <div class="mb-4">
+      <label for="image" class="block text-gray-700 font-medium mb-1">URL de la imagen (opcional)</label>
+      <input type="text"
+             id="image"
+             name="image"
+             [(ngModel)]="image"
+             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
+             placeholder="https://ejemplo.com/imagen.jpg" />
+    </div>
+
+    <!-- Habilitado -->
+    <div class="mb-6 flex items-center gap-2">
+      <input type="checkbox"
+             id="enabled"
+             name="enabled"
+             [(ngModel)]="enabled"
+             class="w-4 h-4 text-amber-500 rounded focus:ring-amber-400" />
+      <label for="enabled" class="text-gray-700 font-medium">Plato disponible</label>
+    </div>
+
+    <!-- Botones -->
+    <div class="flex gap-3">
+      <button type="submit"
+              [disabled]="dishFormRef.invalid"
+              class="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-gray-900 font-bold px-6 py-2 rounded-lg transition-colors">
+        {{ dish ? 'Guardar cambios' : 'Crear plato' }}
+      </button>
+      <button type="button"
+              (click)="onCancel()"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-6 py-2 rounded-lg transition-colors">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

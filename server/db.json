@@ -1,0 +1,101 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "chef",
+      "password": "chef",
+      "email": "chef@test.com",
+      "role": "chef"
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "1234",
+      "email": "user1@test.com",
+      "role": "user"
+    }
+  ],
+  "dishes": [
+    {
+      "id": "1",
+      "name": "Ensalada de tomate",
+      "description": "Ensalada de tomate con aceite de oliva virgen extra",
+      "price": 5.5,
+      "category": "entrantes",
+      "image": "https://picsum.photos/seed/ensalada/400/300",
+      "enabled": true
+    },
+    {
+      "id": "2",
+      "name": "Sopa de cebolla",
+      "description": "Sopa de cebolla gratinada con queso emmental",
+      "price": 6.75,
+      "category": "entrantes",
+      "image": "https://picsum.photos/seed/sopa/400/300",
+      "enabled": true
+    },
+    {
+      "id": "3",
+      "name": "Chuletón de ternera",
+      "description": "Chuletón de ternera a la brasa con patatas asadas",
+      "price": 22.5,
+      "category": "principales",
+      "image": "https://picsum.photos/seed/chuleta/400/300",
+      "enabled": true
+    },
+    {
+      "id": "4",
+      "name": "Merluza a la vasca",
+      "description": "Merluza fresca en salsa verde con almejas",
+      "price": 18.9,
+      "category": "principales",
+      "image": "https://picsum.photos/seed/merluza/400/300",
+      "enabled": true
+    },
+    {
+      "id": "5",
+      "name": "Tiramisú",
+      "description": "Tiramisú casero con mascarpone y café",
+      "price": 7,
+      "category": "postres",
+      "image": "https://picsum.photos/seed/tiramisu/400/300",
+      "enabled": true
+    },
+    {
+      "id": "6",
+      "name": "Tarta de queso",
+      "description": "Tarta de queso al horno con mermelada de frutos rojos",
+      "price": 6.5,
+      "category": "postres",
+      "image": "https://picsum.photos/seed/tarta/400/300",
+      "enabled": false
+    },
+    {
+      "id": "7",
+      "name": "Agua mineral",
+      "description": "Botella de agua mineral natural 50cl",
+      "price": 2,
+      "category": "bebidas",
+      "image": "https://picsum.photos/seed/agua/400/300",
+      "enabled": true
+    },
+    {
+      "id": "8",
+      "name": "Vino tinto Rioja",
+      "description": "Copa de vino tinto Rioja crianza",
+      "price": 4.5,
+      "category": "bebidas",
+      "image": "https://picsum.photos/seed/vino/400/300",
+      "enabled": true
+    },
+    {
+      "id": "14c0",
+      "name": "Jordi",
+      "description": "asd",
+      "price": 15,
+      "category": "postres",
+      "image": "https://picsum.photos/seed/merluza/400/300",
+      "enabled": true
+    }
+  ]
+}

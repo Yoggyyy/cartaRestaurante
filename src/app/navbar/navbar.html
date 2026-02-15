@@ -1,0 +1,38 @@
+<nav class="bg-gray-900 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo y nombre del restaurante -->
+    <a routerLink="/home" class="flex items-center gap-2 text-xl font-bold hover:text-amber-400 transition-colors">
+      🍽️ La Buena Mesa
+    </a>
+
+    <!-- Enlaces de navegación -->
+    <div class="flex items-center gap-6">
+      <a routerLink="/menu" class="hover:text-amber-400 transition-colors font-medium">
+        Carta
+      </a>
+
+      @if (authService.isChef()) {
+        <a routerLink="/admin" class="hover:text-amber-400 transition-colors font-medium">
+          Gestión
+        </a>
+      }
+
+      @if (!authService.isLogged()) {
+        <a routerLink="/login"
+           class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold px-4 py-2 rounded-lg transition-colors">
+          Iniciar sesión
+        </a>
+      }
+
+      @if (authService.isLogged()) {
+        <span class="text-gray-300 text-sm">
+          Hola, {{ authService.getLoggedUser()?.username }}
+        </span>
+        <button (click)="logout()"
+                class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+          Cerrar sesión
+        </button>
+      }
+    </div>
+  </div>
+</nav>

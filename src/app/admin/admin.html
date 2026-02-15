@@ -1,0 +1,98 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    <!-- Título y botón de crear -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">Gestión de platos</h2>
+      @if (!showForm) {
+        <button (click)="showCreateForm()"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded-lg transition-colors">
+          + Nuevo plato
+        </button>
+      }
+    </div>
+
+    <!-- Formulario crear/editar -->
+    @if (showForm) {
+      <dish-form
+        [dish]="editingDish"
+        (saved)="saveDish($event)"
+        (cancelled)="cancelForm()">
+      </dish-form>
+    }
+
+    <!-- Tabla de platos -->
+    @if (dishes.length > 0) {
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-gray-800 text-white text-left">
+              <th class="px-4 py-3">Imagen</th>
+              <th class="px-4 py-3">Nombre</th>
+              <th class="px-4 py-3">Categoría</th>
+              <th class="px-4 py-3">Precio</th>
+              <th class="px-4 py-3">Estado</th>
+              <th class="px-4 py-3 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (dish of dishes; track dish.id) {
+              <tr class="border-b border-gray-200 hover:bg-gray-50"
+                  [class.opacity-50]="!dish.enabled">
+                <!-- Imagen -->
+                <td class="px-4 py-3">
+                  @if (dish.image) {
+                    <img [src]="dish.image" [alt]="dish.name" class="w-16 h-12 object-cover rounded" />
+                  } @else {
+                    <div class="w-16 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                      🍽️
+                    </div>
+                  }
+                </td>
+                <!-- Nombre -->
+                <td class="px-4 py-3 font-medium text-gray-800">{{ dish.name }}</td>
+                <!-- Categoría -->
+                <td class="px-4 py-3">
+                  <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded-full">
+                    {{ dish.category }}
+                  </span>
+                </td>
+                <!-- Precio -->
+                <td class="px-4 py-3 font-medium">{{ dish.price | currency: 'EUR' : 'symbol' }}</td>
+                <!-- Estado -->
+                <td class="px-4 py-3">
+                  @if (dish.enabled) {
+                    <span class="text-green-600 font-semibold text-sm">Activo</span>
+                  } @else {
+                    <span class="text-red-500 font-semibold text-sm">Deshabilitado</span>
+                  }
+                </td>
+                <!-- Acciones -->
+                <td class="px-4 py-3 text-center">
+                  <div class="flex gap-2 justify-center">
+                    <button (click)="showEditForm(dish)"
+                            class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded transition-colors">
+                      Editar
+                    </button>
+                    <button (click)="toggleEnabled(dish)"
+                            class="text-sm px-3 py-1 rounded transition-colors"
+                            [class]="dish.enabled
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-gray-900'
+                              : 'bg-green-500 hover:bg-green-600 text-white'">
+                      {{ dish.enabled ? 'Deshabilitar' : 'Habilitar' }}
+                    </button>
+                    <button (click)="deleteDish(dish)"
+                            class="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded transition-colors">
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="text-center text-gray-500 text-lg mt-12">No hay platos registrados.</p>
+    }
+  </div>
+</div>

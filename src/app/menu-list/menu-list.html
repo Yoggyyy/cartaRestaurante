@@ -1,0 +1,39 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4">
+  <div class="max-w-6xl mx-auto">
+    <!-- Título -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Nuestra Carta</h2>
+
+    <!-- Filtros -->
+    <div class="flex flex-wrap gap-4 justify-center mb-8">
+      <!-- Filtro por categoría -->
+      <select [(ngModel)]="filterCategory"
+              name="filterCategory"
+              class="border border-gray-300 rounded-lg px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+        <option value="">Todas las categorías</option>
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+
+      <!-- Ordenar por precio -->
+      <select [(ngModel)]="sortOrder"
+              name="sortOrder"
+              class="border border-gray-300 rounded-lg px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+        <option value="">Sin ordenar</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+      </select>
+    </div>
+
+    <!-- Grid de platos -->
+    @if (sortedDishes.length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (dish of sortedDishes; track dish.id) {
+          <dish-item [dish]="dish"></dish-item>
+        }
+      </div>
+    } @else {
+      <p class="text-center text-gray-500 text-lg mt-12">No hay platos disponibles en esta categoría.</p>
+    }
+  </div>
+</div>
